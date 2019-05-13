@@ -17,8 +17,8 @@ def run(id):
             command = './script.sh ' + def_title + ' ' + 'https://www.youtube.com/watch?v=' +  vid_id
             print(command)
             os.system(command)
+            meta.editMeta(title)
         except:
             print("Video not found!")    
 
 
-run('7wgwcYspJRXjprqOfFMJzL')
