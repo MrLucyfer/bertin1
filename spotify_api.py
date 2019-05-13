@@ -19,18 +19,16 @@ def refresh_token():
 	return r["access_token"]
 
 def getTitles(id, token):
-	playlist_id = id
-	url = 'https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks?fields=items(track(name))'
+    playlist_id = id
+    url = 'https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks?fields=items(track(name, album(name, artists)))'
     titles = []
     headers = {"Authorization": "Bearer " + token}
     r = requests.get(url, headers=headers)
     d = ast.literal_eval(r.text)
     for item in (d["items"]):
-	    titles.append(item["track"]["name"])
+        titles.append([str(item["track"]["name"]), str(item["track"]["album"]["artists"][0]["name"]), str(item["track"]["album"]["name"])])
     return titles
 	
     
-
-
 
 
